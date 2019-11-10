@@ -1,0 +1,71 @@
+﻿@model StoreViewModel
+
+@{
+    ViewData["Title"] = "CreateStore";
+}
+
+<h1>CreateStore</h1>
+
+<h4>Stores</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-controller="Company" asp-action="CreateStore" id="location-form">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            @* måste skriva input tag för att bekräfta create method och använda asp-for till id som användas i vm och name="newId" samma som post create variable namn *@
+            <input type="hidden" asp-for="CompanyId" name="newId" />
+            @* här måste bli din id fr vm som användas att koppla till store i method create get *@
+
+            <div class="form-group">
+                <label asp-for="Stores.Name" class="control-label"></label>
+                <input asp-for="Stores.Name" class="form-control" id="sName" />
+                <span asp-validation-for="Stores.Name" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Stores.Address" class="control-label"></label>
+                <input asp-for="Stores.Address" class="form-control" id="sAddress" />
+                <span asp-validation-for="Stores.Address" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Stores.City" class="control-label"></label>
+                <input asp-for="Stores.City" class="form-control" id="location-input" />
+                <span asp-validation-for="Stores.City" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Stores.Zip" class="control-label"></label>
+                <input asp-for="Stores.Zip" class="form-control" id="sZip" />
+                <span asp-validation-for="Stores.Zip" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Stores.Country" class="control-label"></label>
+                <input asp-for="Stores.Country" class="form-control" id="sCountry" />
+                <span asp-validation-for="Stores.Country" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Stores.Latitude" class="control-label"></label>
+                <input asp-for="Stores.Latitude" class="form-control" id="latValue" name="latValue" />
+                <span asp-validation-for="Stores.Latitude" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Stores.Longitude" class="control-label"></label>
+                <input asp-for="Stores.Longitude" class="form-control" id="lngValue" name="lngValue" />
+                <span asp-validation-for="Stores.Longitude" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+                <button type="submit" class="btn btn-primary btn-block">Submit</button>
+
+            </div>
+        </form>
+    </div>
+</div>
+
+<div id="map"></div>
+
+<div>
+    <a asp-action="Details" asp-route-id="@Model.CompanyId">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
